@@ -7,6 +7,7 @@ import com.example.JWTProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -32,5 +33,10 @@ public class LoginController {
         return "testJwtPrivate passed (private)";
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/testjwt")
+    public String test() {
+        System.out.println();
+        return "testJwtPrivate passed (private admin test)";
+    }
 }
